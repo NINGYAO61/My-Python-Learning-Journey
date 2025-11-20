@@ -1,0 +1,81 @@
+# 初始化情绪记录列表（每个存：日期、情绪、备注）
+emotion_records = []
+
+# 主菜单循环
+while True:
+    print("\n===== 情绪日记 =====")
+    print("1. 记录今日情绪")
+    print("2. 查看历史记录")
+    print("3. 获取情绪小建议")
+    print("4. 退出")
+    
+    # 获取用户选择
+    choice = input("请输入操作编号（1-4）：")
+    
+    if choice == "1":
+        # 记录情绪
+        print("\n----- 记录情绪 -----")
+        date = input("请输入今天的日期（例如：2025-10-26）：")
+        
+        # 情绪选项（用数字简化选择）
+        print("\n情绪选项：1.开心  2.难过  3.平静  4.烦躁")
+        emotion_choice = input("请选择今天的主要情绪（输入数字）：")
+        
+        # 转换数字为情绪文字
+        if emotion_choice == "1":
+            emotion = "开心"
+        elif emotion_choice == "2":
+            emotion = "难过"
+        elif emotion_choice == "3":
+            emotion = "平静"
+        elif emotion_choice == "4":
+            emotion = "烦躁"
+        else:
+            emotion = "未明确"
+        
+        note = input("可以简单写一句备注（可选）：")
+        
+        # 保存记录（元组格式：(日期, 情绪, 备注)）
+        record = (date, emotion, note)
+        emotion_records.append(record)
+        print("记录成功！已保存到情绪日记~")
+    
+    elif choice == "2":
+        # 查看历史记录
+        print("\n----- 历史情绪记录 -----")
+        if len(emotion_records) == 0:
+            print("还没有记录哦，快去记录今天的情绪吧~")
+        else:
+            # 循环打印所有记录
+            for i in range(len(emotion_records)):
+                # 取第i条记录的三个元素
+                date = emotion_records[i][0]
+                emotion = emotion_records[i][1]
+                note = emotion_records[i][2]
+                print(f"第{i+1}条：日期 {date}，情绪 {emotion}，备注：{note}")
+    
+    elif choice == "3":
+        # 获取情绪建议
+        print("\n----- 情绪小建议 -----")
+        print("请告诉我你现在的情绪（1.开心  2.难过  3.平静  4.烦躁）：")
+        suggest_choice = input("输入数字：")
+        
+        if suggest_choice == "1":
+            print("开心的时候可以多和朋友分享，让快乐翻倍哦~")
+        elif suggest_choice == "2":
+            print("难过的话可以试试听首喜欢的歌，或者写写日记释放情绪~")
+        elif suggest_choice == "3":
+            print("平静是很舒服的状态，适合做一些需要专注的小事，比如看书~")
+        elif suggest_choice == "4":
+            print("烦躁时可以试试深呼吸10次，或者出去走5分钟，会轻松一点~")
+        else:
+            print("输入的数字不对哦，下次记得输入1-4呀~")
+    
+    elif choice == "4":
+        # 退出程序
+        print("再见啦，记得常来记录情绪哦~")
+        break
+    
+    else:
+        # 输入错误提示
+        print("输入错误，请输入1-4之间的数字！")
